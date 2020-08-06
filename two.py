@@ -29,7 +29,7 @@ while result_cut:
 		        <title>信息</title>
 	        </head>
 	        <body>
-                <table>
+                <table width=500 height=248>
                     <tr>
                         <th>姓名</th>
                         <th>性别</th>
@@ -37,7 +37,6 @@ while result_cut:
                         <th>联系地址</th>
                         <th>得分</th>
                     </tr>
-                
     """
     f.write(message1)
     str5 = str(num-1)
@@ -74,6 +73,7 @@ while result_cut:
     if int(str5) == 0 :
         message3 ="""        
                 </table>
+
                 <a href="%s.html">下一页</a>
                 <a href="%s.html">尾页</a>
                 
@@ -83,6 +83,7 @@ while result_cut:
     elif not row :
         message3 ="""        
                 </table>
+
                 <a href="1.html">首页</a>
                 <a href="%s.html">上一页</a>               
             </body>
@@ -91,6 +92,7 @@ while result_cut:
     else:
             message3 ="""        
                 </table>
+                
                 <a href="1.html">首页</a>
                 <a href="%s.html">上一页</a>
                 <a href="%s.html">下一页</a>
