@@ -13,9 +13,9 @@ def find_infor(db_name,ql_name,page_num):
     #num网页名称编号的起始
     num=0
 
-    result_cut=result//5+1
-    result_end=result//5+1
-    i=0
+    result_cut=result//page_num+1
+    result_end=result//page_num+1
+    
     while result_cut: 
         result_cut-=1
         
@@ -28,20 +28,60 @@ def find_infor(db_name,ql_name,page_num):
                 <head>
                     <meta charset="utf-8">
                     <title>信息</title>
+                    <style >
+                        a {
+                            display:block;
+                            width: 249px;
+                            height: 48px;
+                            background-color: #828888;
+                            font-size: 14px;
+                            color: #fff;
+                            text-decoration: none;	
+                            text-indent: 2em;
+                            line-height: 48px;
+                        }
+                        /* 鼠标经过链接变换背景颜色 */
+                        a:hover{
+                            background-color: #ff5500;
+                        }
+                        span {
+                            
+                            /* 把行内元素转换为行内块元素，可以设置宽和高 ，行内每一个变成的块元素*/
+                            display: inline-block;
+                        }
+                        span .nav{
+                            padding-top: 0;
+                        }
+                    </style>
                 </head>
                 <body>
-                    <table width=500 height=248>
-                        <tr>
-                            <th>姓名</th>
-                            <th>性别</th>
-                            <th>身份证号</th>
-                            <th>联系地址</th>
-                            <th>得分</th>
-                        </tr>
+                    <span>
+                        <a href="1.html">第1页</a>
         """
         f.write(message1)
-        str5 = str(num-1)
-        str6 = str(num+1)
+        
+        str7=int(result_end)+1
+        
+        for n in range(1,str7):
+            message2 ="""
+            <a href="%s.html">第%s页</a>
+            """%(n,n)
+            f.write(message2)
+
+        message3 =  """
+                    </span>
+                    <span >
+                        <table width=500 height=248 class=".nav">
+                        
+                            <tr>
+                                <th>姓名</th>
+                                <th>性别</th>
+                                <th>身份证号</th>
+                                <th>联系地址</th>
+                                <th>得分</th>
+                            </tr>
+        """
+        f.write(message3)
 
         #如果能取到数据则开始构造网页
             
@@ -59,50 +99,28 @@ def find_infor(db_name,ql_name,page_num):
                 str4 = str(row[4])
                 
         # 写入HTML界面中
-                message2 ="""
-                        <tr>
-                            <td>%s</td>
-                            <td>%s</td>
-                            <td>%s</td>
-                            <td>%s</td>
-                            <td>%s</td>
-                        </tr>               
+                message4 ="""
+                            <tr>
+                                <td>%s</td>
+                                <td>%s</td>
+                                <td>%s</td>
+                                <td>%s</td>
+                                <td>%s</td>
+                            </tr>               
                 """% (str0,str1,str2,str3,str4)
                 
-                f.write(message2)
+                f.write(message4)
+
         str7=int(result_end)
-        if int(str5) == 0 :
-            message3 ="""        
-                    </table>
-
-                    <a href="%s.html">下一页</a>
-                    <a href="%s.html">尾页</a>
-                    
+        
+        message5 = """  
+                        </table>
+                    </span >
                 </body>
             </html>
-        """ % (str6,str7)       
-        elif not row :
-            message3 ="""        
-                    </table>
+        """        
 
-                    <a href="1.html">首页</a>
-                    <a href="%s.html">上一页</a>               
-                </body>
-            </html>
-        """ % (str5)
-        else:
-                message3 ="""        
-                    </table>
-                    
-                    <a href="1.html">首页</a>
-                    <a href="%s.html">上一页</a>
-                    <a href="%s.html">下一页</a>
-                    <a href="%s.html">尾页</a>
-                </body>
-            </html>
-            """ % (str5,str6,str7)
-
-        f.write(message3)
+        f.write(message5)
                         
         # 关闭文件
         f.close()
