@@ -39,40 +39,46 @@ def find_infor(db_name,ql_name,page_num):
                             text-decoration: none;	
                             text-indent: 2em;
                             line-height: 48px;
+                            padding: 1px;
                         }
                         /* 鼠标经过链接变换背景颜色 */
                         a:hover{
+                            width: 249px;
+                            height: 48px;
                             background-color: #ff5500;
                         }
-                        span {
+                        div {
                             
                             /* 把行内元素转换为行内块元素，可以设置宽和高 ，行内每一个变成的块元素*/
                             display: inline-block;
+                            margin: 1px auto;
                         }
-                        span .nav{
-                            padding-top: 0;
-                        }
+                        
                     </style>
                 </head>
                 <body>
-                    <span>
+                    
+                    <div>
                         <a href="1.html">第1页</a>
         """
         f.write(message1)
         
         str7=int(result_end)+1
         
-        for n in range(1,str7):
+        
+        for n in range(2,str7):
             message2 ="""
-            <a href="%s.html">第%s页</a>
+                        <a href="%s.html">第%s页</a>
             """%(n,n)
             f.write(message2)
+        
+        
 
         message3 =  """
-                    </span>
-                    <span >
+                    </div>
+                    <div >
                         <table width=500 height=248 class=".nav">
-                        
+                            
                             <tr>
                                 <th>姓名</th>
                                 <th>性别</th>
@@ -82,6 +88,7 @@ def find_infor(db_name,ql_name,page_num):
                             </tr>
         """
         f.write(message3)
+        
 
         #如果能取到数据则开始构造网页
             
@@ -111,11 +118,11 @@ def find_infor(db_name,ql_name,page_num):
                 
                 f.write(message4)
 
-        str7=int(result_end)
         
         message5 = """  
                         </table>
-                    </span >
+                    </div >
+                    
                 </body>
             </html>
         """        
@@ -129,4 +136,4 @@ def find_infor(db_name,ql_name,page_num):
 
 if __name__ == "__main__":
     # find_infor("information",ql_name="people",page_num=5)
-    find_infor("information",ql_name="people",page_num=4)
+    find_infor("information",ql_name="people",page_num=7)
